@@ -5,8 +5,6 @@ class FlotterAnimationController {
 
   FlotterAnimationController(this.animationData, this.animationId) {
     methodChannel = MethodChannel('flotter-' + animationId);
-
-    start();
   }
 
   // Parameters

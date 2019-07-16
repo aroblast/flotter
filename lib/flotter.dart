@@ -20,11 +20,16 @@ class FlotterAnimation extends StatelessWidget {
     creationParamsMap['animationData'] = controller.animationData;
 
     if (Platform.isIOS)
-      return UiKitView(
-        viewType: 'FlotterAnimation',
-        creationParams: creationParamsMap,
-        creationParamsCodec: StandardMessageCodec(),
-        onPlatformViewCreated: null,
+      return Container(
+        width: 100.0,
+        height: 100.0,
+
+        child: UiKitView(
+          viewType: 'FlotterAnimation',
+          creationParams: creationParamsMap,
+          creationParamsCodec: StandardMessageCodec(),
+          onPlatformViewCreated: null,
+        ),
       );
     else
       return Text('Not available on android yet.');

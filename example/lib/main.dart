@@ -12,6 +12,8 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  FlotterAnimationController controller = FlotterAnimationController('data', 'id');
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -19,12 +21,14 @@ class _MyAppState extends State<MyApp> {
         appBar: AppBar(
           title: const Text('Plugin example app'),
         ),
-        body: Center(
-          child: FlotterAnimation(
-            FlotterAnimationController(
-              'DATA', 'ID'
+        body: Column(
+          children: <Widget>[
+            FlotterAnimation(controller),
+            FlatButton(
+              child: Text('test'),
+              onPressed: () => controller.start(),
             )
-          ),
+          ]
         ),
       ),
     );

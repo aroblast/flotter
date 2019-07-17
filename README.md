@@ -2,7 +2,16 @@
 
 Use Lottie animations on iOS.
 
-## Getting Started
+### *Important note*
+
+First of all, you must add this to your `info.plist` file in your iOS project in order to enable the animation views to work correctly:
+
+```xml
+<key>io.flutter.embedded_views_preview</key>
+<true/>
+```
+
+## Getting started
 
 This plugin allows the use of the `LOTAnimationView` on iOS using Flutter's `FlotterAnimation` class.
 
@@ -27,25 +36,25 @@ var animation = FlotterAnimation(controller);
 
 Now, you can control your animation using:
 
-#### play()
+### play()
 
 ```dart
 controller.start()
 ```
 
-#### pause()
+### pause()
 
 ```dart
 controller.pause()
 ```
 
-#### reverse()
+### reverse()
 
 ```dart
 controller.reverse()
 ```
 
-#### stop()
+### stop()
 
 ```dart
 controller.stop()

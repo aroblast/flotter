@@ -1,8 +1,57 @@
 # flotter
 
-A new flutter plugin project.
+Use Lottie animations on iOS.
 
 ## Getting Started
+
+This plugin allows the use of the `LOTAnimationView` on iOS using Flutter's `FlotterAnimation` class.
+
+To add an animation to your application,you must first create a `FotterAnimationController`. It will hold your animation's informations, such as the path of the json file in your assets containing the animation, the name given to the animation, and a few other parameters:
+
+```dart
+var controller = FlotterAnimationController(
+    animationFilePath,
+    name,
+    isLoop, // false by default
+    autoReverse, // false by default
+);
+```
+
+Then, you simply add the controller to an animation view like this:
+
+```dart
+var animation = FlotterAnimation(controller);
+```
+
+## Methods
+
+Now, you can control your animation using:
+
+#### play()
+
+```dart
+controller.start()
+```
+
+#### pause()
+
+```dart
+controller.pause()
+```
+
+#### reverse()
+
+```dart
+controller.reverse()
+```
+
+#### stop()
+
+```dart
+controller.stop()
+```
+
+## About
 
 This project is a starting point for a Flutter
 [plug-in package](https://flutter.dev/developing-packages/),

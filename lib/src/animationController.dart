@@ -3,27 +3,54 @@ import 'package:flutter/services.dart';
 class FlotterAnimationController {
   MethodChannel methodChannel;
 
-  FlotterAnimationController(this.animationData, this.animationId) {
+  FlotterAnimationController(
+    this.jsonFilePath,
+    this.animationId, {
+      this.isLoop = false,
+      this.autoReverse = false
+    }) {
     methodChannel = MethodChannel('flotter-' + animationId);
   }
 
   // Parameters
-  final String animationData;
   final String animationId;
+  final String jsonFilePath;
+  final bool isLoop;
+  final bool autoReverse;
+  String animationData;
+  bool isInitialized = false;
+  
 
-  void start() {
-    methodChannel.invokeMethod('start', { 'id': this.animationId });
+  void init() async {
+    if (!isInitialized)
+    {
+      // Read json file
+      animationData = await rootBundle.loadString(jsonFilePath);
+      isInitialized = await methodChannel.invokeMethod('initialize', {
+        'animationData': animationData,
+        'isLoop': isLoop,
+        'autoReverse': autoReverse,
+      });
+    }
+  }
+
+  void play() {
+    if (isInitialized)
+      methodChannel.invokeMethod('play');
   }
 
   void pause() {
-    methodChannel.invokeMethod('pause', { 'id': this.animationId });
+    if (isInitialized)
+      methodChannel.invokeMethod('pause');
   }
 
   void reverse() {
-    methodChannel.invokeMethod('reverse', { 'id': this.animationId });
+    if (isInitialized)
+      methodChannel.invokeMethod('reverse');
   }
 
   void stop() {
-    methodChannel.invokeMethod('stop', { 'id': this.animationId });
+    if (isInitialized)
+      methodChannel.invokeMethod('stop');
   }
 }

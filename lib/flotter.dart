@@ -14,6 +14,9 @@ class FlotterAnimation extends StatelessWidget {
   
   @override
   Widget build(BuildContext context) {
+    if (!controller.isInitialized)
+      controller.init();
+
     // UIKitView parameters
     Map<String, String> creationParamsMap = {};
     creationParamsMap['animationId'] = controller.animationId;

@@ -11,7 +11,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   FlotterAnimationController controller1 = FlotterAnimationController('assets/done.json', 'done1');
   FlotterAnimationController controller2 = FlotterAnimationController('assets/done.json', 'done2');
-  FlotterAnimationController controller3 = FlotterAnimationController('assets/done.json', 'done3', loopMode: LottieLoopMode.loop);
+  FlotterAnimationController controller3 = FlotterAnimationController('assets/done.json', 'done3', loopMode: FlotterLoopMode.loop);
 
   @override
   Widget build(BuildContext context) {

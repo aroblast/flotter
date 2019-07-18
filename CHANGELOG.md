@@ -5,7 +5,7 @@
 This release is *only for iOS devices*.
 
 - Running `flutter format` on `lib` files.
-- Adding `playFrom` method for Flutter.
+- Adding `playFrom` method for Flutter, and loop modes with `FlotterLoopMode`.
 
 ## 0.2.0
 

@@ -1,25 +1,22 @@
 import 'package:flutter/services.dart';
 
 class FlotterAnimationController {
-  MethodChannel methodChannel;
-
   FlotterAnimationController(
     this.jsonFilePath,
     this.animationId, {
       this.isLoop = false,
       this.autoReverse = false
-    }) {
-    methodChannel = MethodChannel('flotter-' + animationId);
-  }
+    }) : methodChannel = MethodChannel('flotter-' + animationId);
 
   // Parameters
+  final MethodChannel methodChannel;
   final String animationId;
   final String jsonFilePath;
   final bool isLoop;
   final bool autoReverse;
   String animationData;
   bool isInitialized = false;
-  
+
 
   void init() async {
     if (!isInitialized)

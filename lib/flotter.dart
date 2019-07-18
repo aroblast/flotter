@@ -7,10 +7,12 @@ export 'src/animationController.dart';
 
 
 class FlotterAnimation extends StatelessWidget {
-  FlotterAnimation(this.controller);
+  FlotterAnimation(this.controller, { this.height = double.infinity, this.width = double.infinity });
 
   // Parameters
   final FlotterAnimationController controller;
+  final double height;
+  final double width;
   
   @override
   Widget build(BuildContext context) {

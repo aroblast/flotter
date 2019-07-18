@@ -11,7 +11,7 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   FlotterAnimationController controller1 = FlotterAnimationController('assets/done.json', 'done1');
   FlotterAnimationController controller2 = FlotterAnimationController('assets/done.json', 'done2');
-  FlotterAnimationController controller3 = FlotterAnimationController('assets/done.json', 'done3', isLoop: true);
+  FlotterAnimationController controller3 = FlotterAnimationController('assets/done.json', 'done3', loopMode: LottieLoopMode.loop);
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +23,12 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child:  Column(
             children: <Widget>[
-              FlotterAnimation(controller1),
+              Container(
+                width: 100.0,
+                height: 100.0,
+
+                child: FlotterAnimation(controller1),
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 
@@ -31,7 +36,7 @@ class _MyAppState extends State<MyApp> {
                   FlatButton(
                     child: Text('start()'),
                     onPressed: () {
-                      controller1.play();
+                      controller1.playFrom(1.0, 0, LottieLoopMode.autoReverseLoop);
                     }
                   ),
                   FlatButton(
@@ -48,14 +53,24 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ],
               ),
-              FlotterAnimation(controller2),
+              Container(
+                width: 50.0,
+                height: 50.0,
+
+                child: FlotterAnimation(controller2),
+              ),
               FlatButton(
                 child: Text('reverse()'),
                 onPressed: () {
                   controller2.reverse();
                 }
               ),
-              FlotterAnimation(controller3),
+              Container(
+                width: 50.0,
+                height: 50.0,
+
+                child: FlotterAnimation(controller3),
+              ),
               Text('LOOP MODE'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,

@@ -61,13 +61,19 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
             case "initialize":
                 self!.initialize(
                     args!["animationData"] as! String,
-                    args!["isLoop"] as! Bool,
-                    args!["autoReverse"] as! Bool
+                    args!["loopMode"] as! Int
                 )
                 result(self!.isReady)
                 break;
             case "play":
                 self!.play()
+                break;
+            case "playFrom":
+                self!.playFrom(
+                    fromProgress: args!["from"] as! CGFloat,
+                    toProgress: args!["to"] as! CGFloat,
+                    loopModeInt: args!["loopMode"] as! Int
+                )
                 break;
             case "pause":
                 self!.pause()
@@ -93,8 +99,7 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
     
     private func initialize(
         _ animationData: String,
-        _ isLoop: Bool,
-        _ autoReverse: Bool
+        _ loopModeInt: Int
     ) {
         if (!isReady) {
             // Try convert json string to json object
@@ -104,16 +109,23 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
                 
                 animationView.animation = animation
                 
-                if (isLoop) {
-                    animationView.loopMode = ( autoReverse ? .autoReverse : .loop )
-                }
-                else if (autoReverse) {
-                    animationView.loopMode = .repeatBackwards(1)
-                }
-                else {
-                    animationView.loopMode = .playOnce
+                var loopMode: LottieLoopMode
+                
+                switch (loopModeInt) {
+                case 1:
+                    loopMode = .loop
+                    break
+                case 2:
+                    loopMode = .repeatBackwards(1)
+                    break
+                case 3:
+                    loopMode = .autoReverse
+                    break
+                default:
+                    loopMode = .playOnce
                 }
                 
+                animationView.loopMode = loopMode
                 animationView.contentMode = .scaleAspectFill
                 animationView.center = self.view().center
                 
@@ -128,6 +140,36 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
     private func play() {
         if (isReady && !animationView.isAnimationPlaying) {
             animationView.play()
+        }
+    }
+    
+    private func playFrom(fromProgress: CGFloat, toProgress: CGFloat, loopModeInt: Int) {
+        if (isReady && !animationView.isAnimationPlaying) {
+            animationView.currentProgress = fromProgress
+            
+            var loopMode: LottieLoopMode
+            var callback: ((Bool) -> Void) = {
+                (Bool) -> Void in
+            }
+            
+            switch (loopModeInt) {
+            case 1:
+                loopMode = .loop
+                break
+            case 2:
+                loopMode = .playOnce
+                callback = { (Bool) -> Void in
+                    self.animationView.play(fromProgress: toProgress, toProgress: fromProgress, loopMode: .playOnce, completion: nil)
+                }
+                break
+            case 3:
+                loopMode = .autoReverse
+                break
+            default:
+                loopMode = .playOnce
+            }
+            
+            animationView.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode, completion: callback)
         }
     }
     

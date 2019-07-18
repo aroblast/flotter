@@ -1,6 +1,6 @@
 name: flotter
-description: Use Lottie animations on iOS.
-version: 0.2.0
+description: Flotter is a plugin allowing you to use Lottie AnimationViews inside of Flutter, natively, using PlatformViews.
+version: 0.2.1
 author: Bastien LE CORRE <bastien.lecorre@gmail.com>
 homepage: https://github.com/aroblast/flotter
 

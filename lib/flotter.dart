@@ -5,19 +5,18 @@ import 'package:flutter/widgets.dart';
 import 'src/animationController.dart';
 export 'src/animationController.dart';
 
-
 class FlotterAnimation extends StatelessWidget {
-  FlotterAnimation(this.controller, { this.height = double.infinity, this.width = double.infinity });
+  FlotterAnimation(this.controller,
+      {this.height = double.infinity, this.width = double.infinity});
 
   // Parameters
   final FlotterAnimationController controller;
   final double height;
   final double width;
-  
+
   @override
   Widget build(BuildContext context) {
-    if (!controller.isInitialized)
-      controller.init();
+    if (!controller.isInitialized) controller.init();
 
     // UIKitView parameters
     Map<String, String> creationParamsMap = {};
@@ -26,9 +25,9 @@ class FlotterAnimation extends StatelessWidget {
 
     if (Platform.isIOS)
       return Container(
-        width: 100.0,
-        height: 100.0,
-
+        width: width,
+        height: height,
+        
         child: UiKitView(
           viewType: 'FlotterAnimation',
           creationParams: creationParamsMap,

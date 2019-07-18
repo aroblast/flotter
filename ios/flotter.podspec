@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = 'flotter'
-  s.version          = '0.1.0'
+  s.version          = '0.2.1'
   s.summary          = 'Use Lottie animations on iOS.'
   s.description      = <<-DESC
-A new flutter plugin project.
+Flotter is a plugin allowing you to use Lottie AnimationViews inside of Flutter, natively, using PlatformViews.
                        DESC
   s.homepage         = 'https://github.com/aroblast/flotter'
   s.license          = { :file => '../LICENSE' }

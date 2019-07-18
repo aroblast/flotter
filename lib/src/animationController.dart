@@ -4,50 +4,57 @@ class FlotterAnimationController {
   FlotterAnimationController(
     this.jsonFilePath,
     this.animationId, {
-      this.isLoop = false,
-      this.autoReverse = false
-    }) : methodChannel = MethodChannel('flotter-' + animationId);
+    this.loopMode = LottieLoopMode.playOnce,
+  }) : methodChannel = MethodChannel('flotter-' + animationId);
 
   // Parameters
   final MethodChannel methodChannel;
   final String animationId;
   final String jsonFilePath;
-  final bool isLoop;
-  final bool autoReverse;
+  final int loopMode;
   String animationData;
   bool isInitialized = false;
 
-
   void init() async {
-    if (!isInitialized)
-    {
+    if (!isInitialized) {
       // Read json file
       animationData = await rootBundle.loadString(jsonFilePath);
       isInitialized = await methodChannel.invokeMethod('initialize', {
         'animationData': animationData,
-        'isLoop': isLoop,
-        'autoReverse': autoReverse,
+        'loopMode': loopMode,
       });
     }
   }
 
   void play() {
+    if (isInitialized) methodChannel.invokeMethod('play');
+  }
+
+  void playFrom(double from, double to, int loopMode) {
     if (isInitialized)
-      methodChannel.invokeMethod('play');
+      methodChannel.invokeMethod('playFrom', {
+        'from': from,
+        'to': to,
+        'loopMode': loopMode,
+      });
   }
 
   void pause() {
-    if (isInitialized)
-      methodChannel.invokeMethod('pause');
+    if (isInitialized) methodChannel.invokeMethod('pause');
   }
 
   void reverse() {
-    if (isInitialized)
-      methodChannel.invokeMethod('reverse');
+    if (isInitialized) methodChannel.invokeMethod('reverse');
   }
 
   void stop() {
-    if (isInitialized)
-      methodChannel.invokeMethod('stop');
+    if (isInitialized) methodChannel.invokeMethod('stop');
   }
+}
+
+class LottieLoopMode {
+  static const playOnce = 0;
+  static const loop = 1;
+  static const autoReverse = 2;
+  static const autoReverseLoop = 3;
 }

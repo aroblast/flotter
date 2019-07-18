@@ -1,5 +1,4 @@
 import Flutter
-import UIKit
 import Lottie
 
 public class SwiftFlotterPlugin: NSObject, FlutterPlugin {
@@ -29,7 +28,7 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
     let viewId: Int64
     let animationId: String
     let methodChannel: FlutterMethodChannel
-    let animationView: LOTAnimationView
+    let animationView: AnimationView
     var isReady = false
     
     init(_ frame: CGRect, viewId: Int64, args: Any?, binaryMessenger messenger: (NSObjectProtocol & FlutterBinaryMessenger)?) {
@@ -48,7 +47,7 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
         
         // Initialize methodChannel and animationView
         methodChannel = FlutterMethodChannel(name: "flotter-\(animationId)", binaryMessenger: messenger!)
-        animationView = LOTAnimationView(frame: frame)
+        animationView = AnimationView(frame: frame)
         
         super.init()
         
@@ -98,16 +97,23 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
         _ autoReverse: Bool
     ) {
         if (!isReady) {
-            let jsonObject: Any
-            
             // Try convert json string to json object
             do {
-                jsonObject = try JSONSerialization.jsonObject(with: animationData.data(using: .utf8)!, options : .allowFragments) as! [String:Any]
-                
                 // Set animationView
-                animationView.setAnimation(json: jsonObject as! [AnyHashable : Any])
-                animationView.loopAnimation = isLoop
-                animationView.autoReverseAnimation = autoReverse
+                let animation = try JSONDecoder().decode(Animation.self, from: animationData.data(using: .utf8)!)
+                
+                animationView.animation = animation
+                
+                if (isLoop) {
+                    animationView.loopMode = ( autoReverse ? .autoReverse : .loop )
+                }
+                else if (autoReverse) {
+                    animationView.loopMode = .repeatBackwards(1)
+                }
+                else {
+                    animationView.loopMode = .playOnce
+                }
+                
                 animationView.contentMode = .scaleAspectFill
                 animationView.center = self.view().center
                 
@@ -121,7 +127,6 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
     
     private func play() {
         if (isReady && !animationView.isAnimationPlaying) {
-            animationView.animationSpeed = 1
             animationView.play()
         }
     }
@@ -134,8 +139,7 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
     
     private func reverse() {
         if (isReady) {
-            animationView.animationSpeed = -1
-            animationView.play()
+            animationView.play(fromProgress: 1, toProgress: 0, loopMode: .playOnce, completion: nil)
         }
     }
     

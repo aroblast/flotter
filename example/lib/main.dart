@@ -25,6 +25,8 @@ class _MyAppState extends State<MyApp> {
             children: <Widget>[
               FlotterAnimation(controller1),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                
                 children: <Widget>[
                   FlatButton(
                     child: Text('start()'),
@@ -54,22 +56,25 @@ class _MyAppState extends State<MyApp> {
                 }
               ),
               FlotterAnimation(controller3),
+              Text('LOOP MODE'),
               Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+
                 children: <Widget>[
                   FlatButton(
-                    child: Text('start() in loop mode'),
+                    child: Text('start()'),
                     onPressed: () {
                       controller3.play();
                     }
                   ),
                   FlatButton(
-                    child: Text('pause() in loop mode'),
+                    child: Text('pause()'),
                     onPressed: () {
                       controller3.pause();
                     }
                   ),
                   FlatButton(
-                    child: Text('stop() in loop mode'),
+                    child: Text('stop()'),
                     onPressed: () {
                       controller3.stop();
                     }

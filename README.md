@@ -89,7 +89,7 @@ Play from a percentage (0.0 - 1.0) to another with a loop mode specified.
 controller.playFrom(
   fromProgress, // double
   toProgress, // double
-  loopMode // LottieLoopMode (int)
+  loopMode // FlotterLoopMode (int)
 )
 ```
 

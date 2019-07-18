@@ -44,8 +44,7 @@ To add an animation to your application,you must first create a `FotterAnimation
 var controller = FlotterAnimationController(
     animationFilePath,
     name,
-    isLoop, // false by default
-    autoReverse, // false by default
+    loopMode, // FlotterLoopMode.playOnce by default
 );
 ```
 
@@ -55,17 +54,48 @@ Then, you simply add the controller to an animation view like this:
 var animation = FlotterAnimation(controller);
 ```
 
+##Loop modes
+
+The loop mode class is `FlotterLoopMode`, and is written like so:
+
+```dart
+class FlotterLoopMode {
+  static const playOnce = 0;
+  static const loop = 1;
+  static const autoReverse = 2;
+  static const autoReverseLoop = 3;
+}
+```
+
+To indicate a loop mode, use either an integer (0 - 3), or `FlotterLoopMode.[loopMode]`.
+
 ## Methods
 
 Now, you can control your animation using:
 
 ### play()
 
+Play the animation entirely.
+
 ```dart
-controller.start()
+controller.play()
+```
+
+### playFrom(fromProgress, toProgress, loopMode)
+
+Play from a percentage (0.0 - 1.0) to another with a loop mode specified.
+
+```dart
+controller.playFrom(
+  fromProgress, // double
+  toProgress, // double
+  loopMode // LottieLoopMode (int)
+)
 ```
 
 ### pause()
+
+Pause the animation.
 
 ```dart
 controller.pause()
@@ -73,11 +103,15 @@ controller.pause()
 
 ### reverse()
 
+Play the animation in reverse, from progress time 1.0 to 0.0.
+
 ```dart
 controller.reverse()
 ```
 
 ### stop()
+
+Reset the animation to progress time 0.0.
 
 ```dart
 controller.stop()

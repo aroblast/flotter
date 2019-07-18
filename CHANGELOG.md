@@ -1,3 +1,12 @@
+## 0.2.1
+
+**Formatting and new function**
+
+This release is *only for iOS devices*.
+
+- Running `flutter format` on `lib` files.
+- Adding `playFrom` method for Flutter.
+
 ## 0.2.0
 
 **Fixing issues with Swift Flutter plugins**

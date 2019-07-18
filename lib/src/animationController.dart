@@ -4,7 +4,7 @@ class FlotterAnimationController {
   FlotterAnimationController(
     this.jsonFilePath,
     this.animationId, {
-    this.loopMode = LottieLoopMode.playOnce,
+    this.loopMode = FlotterLoopMode.playOnce,
   }) : methodChannel = MethodChannel('flotter-' + animationId);
 
   // Parameters
@@ -52,7 +52,7 @@ class FlotterAnimationController {
   }
 }
 
-class LottieLoopMode {
+class FlotterLoopMode {
   static const playOnce = 0;
   static const loop = 1;
   static const autoReverse = 2;

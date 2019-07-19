@@ -61,10 +61,10 @@ var animation = FlotterAnimation(
 );
 ```
 
-Remember that this view will expand in any direction with no constraints at all. You will have to use it either with `width` and `height` parameters, or place it inside a constrainted widget.
+*Remember that this view will expand in any direction with no constraints at all. You will have to use it either with `width` and `height` parameters, or place it inside a constrainted widget.*
 
 
-##Loop modes
+## Loop modes
 
 The loop mode class is `FlotterLoopMode`, and is written like so:
 

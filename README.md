@@ -2,6 +2,7 @@
 
 Use Lottie animations on iOS.
 
+
 ### *Important note*
 
 First of all, you must add this to your `info.plist` file in your iOS project in order to enable the animation views to work correctly:
@@ -34,6 +35,7 @@ In your *Runner* settings, go to **Build settings**, and set the SWIFT_VERSION t
 
 For more informations, please see [ko2ic tutorial](https://github.com/ko2ic/image_downloader/wiki#your-appdelegate-is-the-case-of-objective-c).
 
+
 ## Getting started
 
 This plugin allows the use of the `LOTAnimationView` on iOS using Flutter's `FlotterAnimation` class.
@@ -61,6 +63,7 @@ var animation = FlotterAnimation(
 
 *Remember that this view will expand in any direction with no constraints at all. You will have to use it either with `width` and `height` parameters, or place it inside a constrainted widget.*
 
+
 ##Loop modes
 
 The loop mode class is `FlotterLoopMode`, and is written like so:
@@ -75,6 +78,7 @@ class FlotterLoopMode {
 ```
 
 To indicate a loop mode, use either an integer (0 - 3), or `FlotterLoopMode.[loopMode]`.
+
 
 ## Methods
 
@@ -123,6 +127,7 @@ Reset the animation to progress time 0.0.
 ```dart
 controller.stop()
 ```
+
 
 ## About
 

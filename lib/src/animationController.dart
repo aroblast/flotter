@@ -15,7 +15,7 @@ class FlotterAnimationController {
   String animationData;
   bool isInitialized = false;
 
-  void init() async {
+  Future<void> init() async {
     if (!isInitialized) {
       // Read json file
       animationData = await rootBundle.loadString(jsonFilePath);

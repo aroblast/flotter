@@ -1,5 +1,5 @@
 PODS:
-  - flotter (0.2.1):
+  - flotter (0.2.2):
     - Flutter
     - lottie-ios
   - Flutter (1.0.0)
@@ -20,7 +20,7 @@ EXTERNAL SOURCES:
     :path: ".symlinks/flutter/ios"
 
 SPEC CHECKSUMS:
-  flotter: 880b0653128334e53e303ad7e009dc950b30230c
+  flotter: b348bc4b02f4f66459591e2eb375f81d13d78afa
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
   lottie-ios: 49cd85b1f24f61a7708ad7ec76a523ab2d0e3100
 

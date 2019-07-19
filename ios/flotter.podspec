@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'flotter'
-  s.version          = '0.2.1'
+  s.version          = '0.2.2'
   s.summary          = 'Use Lottie animations on iOS.'
   s.description      = <<-DESC
 Flotter is a plugin allowing you to use Lottie AnimationViews inside of Flutter, natively, using PlatformViews.

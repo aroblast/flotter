@@ -1,3 +1,11 @@
+## 0.2.2
+
+**Adding play at initialization**
+
+This release is *only for iOS devices*.
+
+- Adding `playAtInit` boolean parameter for `FlotterAnimation`.
+
 ## 0.2.1
 
 **Formatting and new function**

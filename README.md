@@ -51,8 +51,15 @@ var controller = FlotterAnimationController(
 Then, you simply add the controller to an animation view like this:
 
 ```dart
-var animation = FlotterAnimation(controller);
+var animation = FlotterAnimation(
+  controller,
+  width, // double.infinity by default
+  height, // double.infinity by default
+  playAtInit // false by default
+);
 ```
+
+**Remember that this view will expand in any direction with no constraints at all. You will have to use it either with `width` and `height` parameters, or place it inside a constrainted widget.**
 
 ##Loop modes
 

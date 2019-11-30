@@ -65,25 +65,35 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
                 )
                 result(self!.isReady)
                 break;
+                
             case "play":
                 self!.play()
                 break;
+                
             case "playFrom":
                 self!.playFrom(
                     fromProgress: args!["from"] as! CGFloat,
                     toProgress: args!["to"] as! CGFloat,
-                    loopModeInt: args!["loopMode"] as! Int
+                    loopMode: args!["loopMode"] as! [Float]
                 )
                 break;
+                
             case "pause":
                 self!.pause()
                 break;
+                
             case "reverse":
                 self!.reverse()
                 break;
+                
             case "stop":
                 self!.stop()
                 break;
+                
+            case "setAnimationSpeed":
+                self!.setAnimationSpeed(speed: args!["speed"] as! CGFloat)
+                break;
+                
             default:
                 result(FlutterMethodNotImplemented)
             }
@@ -94,9 +104,9 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
         return animationView;
     }
     
-    
-    //* FlotterAnimationView functions *//
-    
+    // ------------------
+    // State functions
+    // ------------------
     private func initialize(
         _ animationData: String,
         _ loopModeInt: Int
@@ -137,39 +147,42 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
         }
     }
     
+    
+    // ------------------
+    // Playback functions
+    // ------------------
     private func play() {
         if (isReady && !animationView.isAnimationPlaying) {
             animationView.play()
         }
     }
     
-    private func playFrom(fromProgress: CGFloat, toProgress: CGFloat, loopModeInt: Int) {
+    private func playFrom(fromProgress: CGFloat, toProgress: CGFloat, loopMode: [Float]) {
         if (isReady && !animationView.isAnimationPlaying) {
             animationView.currentProgress = fromProgress
             
-            var loopMode: LottieLoopMode
-            var callback: ((Bool) -> Void) = {
-                (Bool) -> Void in
+            var lottieLoopMode: LottieLoopMode
+            switch (loopMode[0]) {
+                case 0:
+                    lottieLoopMode = .autoReverse
+                    break
+                case 1:
+                    lottieLoopMode = .loop
+                    break
+                case 2:
+                    lottieLoopMode = .playOnce
+                    break
+                case 3:
+                    lottieLoopMode = .repeat(loopMode[1])
+                    break
+                case 4:
+                    lottieLoopMode = .repeatBackwards(loopMode[1])
+                    break
+                default:
+                    lottieLoopMode = .playOnce
             }
             
-            switch (loopModeInt) {
-            case 1:
-                loopMode = .loop
-                break
-            case 2:
-                loopMode = .playOnce
-                callback = { (Bool) -> Void in
-                    self.animationView.play(fromProgress: toProgress, toProgress: fromProgress, loopMode: .playOnce, completion: nil)
-                }
-                break
-            case 3:
-                loopMode = .autoReverse
-                break
-            default:
-                loopMode = .playOnce
-            }
-            
-            animationView.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: loopMode, completion: callback)
+            animationView.play(fromProgress: fromProgress, toProgress: toProgress, loopMode: lottieLoopMode, completion: { (Bool) -> Void in })
         }
     }
     
@@ -188,6 +201,21 @@ public class FlotterAnimationView: NSObject, FlutterPlatformView {
     private func stop() {
         if (isReady) {
             animationView.stop()
+        }
+    }
+    
+    private func setAnimationSpeed(speed: CGFloat) {
+        if (isReady) {
+            animationView.animationSpeed = speed;
+        }
+    }
+    
+    private func getAnimationSpeed() -> CGFloat {
+        if (isReady) {
+            return animationView.animationSpeed;
+        }
+        else {
+            return 0.0
         }
     }
 }

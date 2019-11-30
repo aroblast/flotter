@@ -43,7 +43,7 @@ class _MyAppState extends State<MyApp> {
                   FlatButton(
                     child: Text('playFrom()'),
                     onPressed: () {
-                      controller1.playFrom(1.0, 0, FlotterLoopMode.autoReverseLoop);
+                      controller1.playFrom(1.0, 0, FlotterLoopMode.autoReverse);
                     }
                   ),
                   FlatButton(

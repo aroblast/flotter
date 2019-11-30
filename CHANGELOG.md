@@ -1,3 +1,12 @@
+## 0.3.0
+
+**Editing FlotterLoopMode to match LottieLoopMode**
+
+This release is *only for iOS devices*.
+
+- Editing `FlotterLoopMode` class to have the same loop option as in native Lottie iOS' `LottieLoopMode` class.
+- Removing deployment targets in Xcode and upgrading to recommended settings.
+
 ## 0.2.2
 
 **Adding play at initialization**

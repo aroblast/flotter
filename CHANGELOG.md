@@ -5,7 +5,8 @@
 This release is *only for iOS devices*.
 
 - Editing `FlotterLoopMode` class to have the same loop option as in native Lottie iOS' `LottieLoopMode` class.
-- Removing deployment targets in Xcode and upgrading to recommended settings.
+- Updating the deployment targets in Xcode to match Lottie's and upgrading the pods to the recommended settings.
+- Converting the example's `AppDelegate` to Swift 5.
 
 ## 0.2.2
 

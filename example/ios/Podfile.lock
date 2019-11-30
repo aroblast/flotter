@@ -1,5 +1,5 @@
 PODS:
-  - flotter (0.2.2):
+  - flotter (0.3.0):
     - Flutter
     - lottie-ios
   - Flutter (1.0.0)

@@ -1,3 +1,22 @@
+## 0.3.0
+
+**Editing FlotterLoopMode to match LottieLoopMode**
+
+This release is *only for iOS devices*.
+
+- Editing `FlotterLoopMode` class to have the same loop option as in native Lottie iOS' `LottieLoopMode` class.
+- Adding `setAnimationSpeed(double speed)` method to change the animation speed.
+- Updating the deployment targets in Xcode to match Lottie's and upgrading the pods to the recommended settings.
+- Converting the example's `AppDelegate` to Swift 5.
+
+## 0.2.2
+
+**Adding play at initialization**
+
+This release is *only for iOS devices*.
+
+- Adding `playAtInit` boolean parameter for `FlotterAnimation`.
+
 ## 0.2.1
 
 **Formatting and new function**

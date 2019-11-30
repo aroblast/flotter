@@ -23,20 +23,27 @@ class _MyAppState extends State<MyApp> {
         body: Center(
           child:  Column(
             children: <Widget>[
-              Container(
+              FlotterAnimation(
+                controller1,
+                
                 width: 100.0,
                 height: 100.0,
-
-                child: FlotterAnimation(controller1),
               ),
+
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 
                 children: <Widget>[
                   FlatButton(
-                    child: Text('start()'),
+                    child: Text('play()'),
                     onPressed: () {
-                      controller1.playFrom(1.0, 0, FlotterLoopMode.autoReverseLoop);
+                      controller1.play();
+                    }
+                  ),
+                  FlatButton(
+                    child: Text('playFrom()'),
+                    onPressed: () {
+                      controller1.playFrom(1.0, 0, FlotterLoopMode.autoReverse);
                     }
                   ),
                   FlatButton(
@@ -53,31 +60,35 @@ class _MyAppState extends State<MyApp> {
                   ),
                 ],
               ),
-              Container(
-                width: 50.0,
-                height: 50.0,
-
-                child: FlotterAnimation(controller2),
+              
+              FlotterAnimation(
+                controller2,
+                
+                width: 100.0,
+                height: 100.0,
               ),
+
               FlatButton(
                 child: Text('reverse()'),
                 onPressed: () {
                   controller2.reverse();
                 }
               ),
-              Container(
-                width: 50.0,
-                height: 50.0,
 
-                child: FlotterAnimation(controller3),
+              FlotterAnimation(
+                controller3,
+                
+                width: 100.0,
+                height: 100.0,
               ),
+
               Text('LOOP MODE'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
 
                 children: <Widget>[
                   FlatButton(
-                    child: Text('start()'),
+                    child: Text('play()'),
                     onPressed: () {
                       controller3.play();
                     }

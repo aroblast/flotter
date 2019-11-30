@@ -11,11 +11,11 @@ class FlotterAnimationController {
   final MethodChannel methodChannel;
   final String animationId;
   final String jsonFilePath;
-  final int loopMode;
+  final List<double> loopMode;
   String animationData;
   bool isInitialized = false;
 
-  void init() async {
+  Future<void> init() async {
     if (!isInitialized) {
       // Read json file
       animationData = await rootBundle.loadString(jsonFilePath);
@@ -26,11 +26,14 @@ class FlotterAnimationController {
     }
   }
 
+  // ----------------
+  // Playback methods
+  // ----------------
   void play() {
     if (isInitialized) methodChannel.invokeMethod('play');
   }
 
-  void playFrom(double from, double to, int loopMode) {
+  void playFrom(double from, double to, List<double> loopMode) {
     if (isInitialized)
       methodChannel.invokeMethod('playFrom', {
         'from': from,
@@ -50,11 +53,16 @@ class FlotterAnimationController {
   void stop() {
     if (isInitialized) methodChannel.invokeMethod('stop');
   }
+
+  void setAnimationSpeed(double speed) {
+    if (isInitialized) methodChannel.invokeMethod('setAnimationSpeed', { 'speed': speed });
+  }
 }
 
 class FlotterLoopMode {
-  static const playOnce = 0;
-  static const loop = 1;
-  static const autoReverse = 2;
-  static const autoReverseLoop = 3;
+  static const List<double> autoReverse = [0, 0];
+  static const List<double> loop = [1, 0];
+  static const List<double> playOnce = [2, 0];
+  static List<double> repeat(double n) { return [3, n]; }
+  static List<double> repeatBackwards(double n) { return [4, n]; }
 }

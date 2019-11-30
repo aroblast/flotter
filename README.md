@@ -2,7 +2,8 @@
 
 Use Lottie animations on iOS.
 
-### *Important note*
+
+## Important note
 
 First of all, you must add this to your `info.plist` file in your iOS project in order to enable the animation views to work correctly:
 
@@ -34,6 +35,7 @@ In your *Runner* settings, go to **Build settings**, and set the SWIFT_VERSION t
 
 For more informations, please see [ko2ic tutorial](https://github.com/ko2ic/image_downloader/wiki#your-appdelegate-is-the-case-of-objective-c).
 
+
 ## Getting started
 
 This plugin allows the use of the `LOTAnimationView` on iOS using Flutter's `FlotterAnimation` class.
@@ -51,23 +53,21 @@ var controller = FlotterAnimationController(
 Then, you simply add the controller to an animation view like this:
 
 ```dart
-var animation = FlotterAnimation(controller);
+var animation = FlotterAnimation(
+  controller,
+  width, // double.infinity by default
+  height, // double.infinity by default
+  playAtInit // false by default
+);
 ```
 
-##Loop modes
+*Remember that this view will expand in any direction with no constraints at all. You will have to use it either with `width` and `height` parameters, or place it inside a constrainted widget.*
 
-The loop mode class is `FlotterLoopMode`, and is written like so:
 
-```dart
-class FlotterLoopMode {
-  static const playOnce = 0;
-  static const loop = 1;
-  static const autoReverse = 2;
-  static const autoReverseLoop = 3;
-}
-```
+## Loop modes
 
-To indicate a loop mode, use either an integer (0 - 3), or `FlotterLoopMode.[loopMode]`.
+The loop mode class is `FlotterLoopMode`, and offers the same loop modes as `LottieLoopMode` offers. To indicate a loop mode, use `FlotterLoopMode.[loopMode]`.
+
 
 ## Methods
 
@@ -89,7 +89,7 @@ Play from a percentage (0.0 - 1.0) to another with a loop mode specified.
 controller.playFrom(
   fromProgress, // double
   toProgress, // double
-  loopMode // FlotterLoopMode (int)
+  loopMode // FlotterLoopMode
 )
 ```
 
@@ -117,13 +117,9 @@ Reset the animation to progress time 0.0.
 controller.stop()
 ```
 
+
 ## About
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+This project is a Flutter [plug-in package](https://flutter.dev/developing-packages/), a specialized package that includes platform-specific implementation code for Android and/or iOS.
 
-For help getting started with Flutter, view our 
-[online documentation](https://flutter.dev/docs), which offers tutorials, 
-samples, guidance on mobile development, and a full API reference.
+For help getting started with Flutter, view our  [online documentation](https://flutter.dev/docs), which offers tutorials, samples, guidance on mobile development, and a full API reference.
